@@ -1,13 +1,10 @@
 #include <Arduino.h>
-#include <RBE1001Lib.h>
-#include "Motor.h"
-#include "Rangefinder.h"
+#include <WiFi.h> 
+#include <ESP32WebRemoteControl.h>
 #include <ESP32Servo.h>
-#include <ESP32AnalogRead.h>
 #include <Esp32WifiManager.h>
 #include "wifi/WifiManager.h"
 #include "WebPage.h"
-#include <Timer.h>
 
 
 Servo m1;
@@ -60,12 +57,13 @@ WifiManager manager;
 int inc = 0;
 int timerTime = 0;
 void setup() {
-  manager.setup();  // Connect to an infrastructure network first, then fail over to AP mode
-  //manager.setupAP();// Launch AP mode first, then fail over to connecting to a station
+  //manager.setup();  // Connect to an infrastructure network first, then fail over to AP mode
+  manager.setupAP();// Launch AP mode first, then fail over to connecting to a station
   while (manager.getState() != Connected) {
     manager.loop();
     delay(1);
   }
+  Serial.println("Wifi Connected!");
   ESP32PWM::allocateTimer(1);  // Used by servos
   m1.attach(5);
   m2.attach(16);
@@ -88,8 +86,8 @@ void setup() {
  */
 void runStateMachine() {
 
-  float x = control_page.getJoystickX();
-  float y = control_page.getJoystickY();
+  //float x = control_page.getJoystickX();
+  //float y = control_page.getJoystickY();
   float slide = control_page.getSliderValue(0);
   int offset = slide * 10 - 5;
 
