@@ -57,21 +57,31 @@ WifiManager manager;
 int inc = 0;
 int timerTime = 0;
 void setup() {
+  ESP32PWM::allocateTimer(1);  // Used by servos
+  m1.attach(14);
+  m2.attach(27);
+  m3.attach(26);
+
+  m1.write(90);
+  m2.write(90);
+  m3.write(90);
+
   //manager.setup();  // Connect to an infrastructure network first, then fail over to AP mode
   manager.setupAP();// Launch AP mode first, then fail over to connecting to a station
   while (manager.getState() != Connected) {
     manager.loop();
     delay(1);
+  //   delay(1000);
+  //     m1.write(120);
+  // m2.write(120);
+  // m3.write(120);
+  //   delay(1000);
+  //     m1.write(90);
+  // m2.write(90);
+  // m3.write(90);
   }
   Serial.println("Wifi Connected!");
-  ESP32PWM::allocateTimer(1);  // Used by servos
-  m1.attach(5);
-  m2.attach(16);
-  m3.attach(17);
 
-  m1.write(90);
-  m2.write(90);
-  m3.write(90);
 
   control_page.initalize();  // Init UI after everything else.
 }
