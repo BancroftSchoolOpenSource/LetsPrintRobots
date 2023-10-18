@@ -135,9 +135,9 @@ void runStateMachine() {
       
 	// }
   long buttons = 0;
-  long mouth = 90;
+  long mouth = 40;
   if(nunchuck1.values[10]>0){
-    buttons=255;
+    buttons=90;
   }
   if(nunchuck1.values[11]>0){
     mouth=120;
