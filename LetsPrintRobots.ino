@@ -143,8 +143,8 @@ void runStateMachine() {
     mouth=120;
   }
   slide = fmap(buttons,0,255,-1.0,1.0);
-  x= fmap(nunchuck1.values[1],0,255,-1.0,1.0);
-  y= fmap(nunchuck1.values[0],0,255,-1.0,1.0);
+  x= -fmap(nunchuck1.values[0],0,255,-1.0,1.0);
+  y= -fmap(nunchuck1.values[1],0,255,-1.0,1.0);
   //slide = control_page.getSliderValue(0);
 	int offset = slide * 20 ;
   int scale =30;
