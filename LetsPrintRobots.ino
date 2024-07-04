@@ -68,7 +68,7 @@ void setup() {
 	m3.write(90);
   m4.write(90);
 	//manager.setup();  // Connect to an infrastructure network first, then fail over to AP mode
-	manager.setup(); // Launch AP mode first, then fail over to connecting to a station
+	//manager.setup(); // Launch AP mode first, then fail over to connecting to a station
 	// while (manager.getState() != Connected) {
 	// 	manager.loop();
 	// 	delay(10);
@@ -82,8 +82,10 @@ void setup() {
 	// 	// m2.write(90);
 	// 	// m3.write(90);
 	// }
-	delay(100);
+  Serial.begin(115200);
 	Serial.println("Wifi Connected!");
+
+	delay(100);
 	//control_page.initalize();  // Init UI after everything else.
 	Serial.println("Starting the Web Control");
 	timerTime=millis()+100;
@@ -156,6 +158,7 @@ void runStateMachine() {
 	m2.write(m2val);
 	m3.write(m3val);
   m4.write(mouth);
+  delay(10);
 }
 
 /*
@@ -199,7 +202,7 @@ void updateDashboard() {
 
 void loop() {
 
-	manager.loop();
+	//manager.loop();
 	runStateMachine();                    // do a pass through the state machine
 	//if (manager.getState() == Connected)  // only update if WiFi is up
 	//	updateDashboard();                  // update the dashboard values
